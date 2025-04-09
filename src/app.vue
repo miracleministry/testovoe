@@ -21,24 +21,38 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
     data() {
         return {
-            tasks: [
-                { "id": 1, "title": "Задача 1", "done": false },
-                { "id": 2, "title": "Задача 2", "done": false },
-                { "id": 3, "title": "Задача 3", "done": false },
-                { "id": 4, "title": "Задача 4", "done": false },
-                { "id": 5, "title": "Задача 5", "done": false }
-            ],
+            tasks: null
         }
     },
     methods: {
         switchDone(taskId) {
             const found = this.tasks.find((element) => element.id == taskId);
             found.done = !found.done
+            this.saveTasks()
         },
+        async getTasks() {
+            try {
+                Response = await axios.get('/json');
+                this.tasks = Response.data
+            } catch (e) {
+                alert("Error")
+            }
+        },
+        async saveTasks() {
+            try {
+                await axios.post('/savejson', this.tasks);
+            } catch (e) {
+                alert("Error")
+            }
+        }
+    },
+    mounted() {
+        this.getTasks()
     }
 }
 </script>
