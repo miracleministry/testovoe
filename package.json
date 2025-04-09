@@ -1,0 +1,15 @@
+{
+  "name": "testovoe",
+  "version": "0.0.1",
+  "description": "testovoe",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git-repo"
+  },
+  "author": "",
+  "license": "ISC"
+}
