@@ -12,8 +12,8 @@
                 <td>{{ task.id }}</td>
                 <td>{{ task.title }}</td>
                 <td>
-                    <input v-if="task.done" type="checkbox" name="" id="" checked>
-                    <input v-else="task.done" type="checkbox" name="" id="">
+                    <input v-if="task.done" @click="switchDone(task.id)" type="checkbox" name="" id="" checked>
+                    <input v-else="task.done" @click="switchDone(task.id)" type="checkbox" name="" id="">
                 </td>
             </tr>
         </tbody>
@@ -31,11 +31,14 @@ export default {
                 { "id": 3, "title": "Задача 3", "done": false },
                 { "id": 4, "title": "Задача 4", "done": false },
                 { "id": 5, "title": "Задача 5", "done": false }
-            ]
+            ],
         }
     },
     methods: {
-
+        switchDone(taskId) {
+            const found = this.tasks.find((element) => element.id == taskId);
+            found.done = !found.done
+        },
     }
 }
 </script>
