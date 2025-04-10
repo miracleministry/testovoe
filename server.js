@@ -8,7 +8,6 @@ fs.readdirSync('./dist/js').forEach(element => {
     element = `/js/${element}`
     distJsFiles.push(element)
 });
-
 let server = new http.Server(function (req, res) {
     if (req.url == "/json") {
         let jsonString = fs.readFileSync('./src/tasks.json', "utf-8")
@@ -20,11 +19,12 @@ let server = new http.Server(function (req, res) {
             data += chunk;
         });
         req.on("end", () => {
-            fs.writeFileSync("./src/tasks.json", json);
+            fs.writeFileSync("./src/tasks.json", data);
         });
         res.statusCode = 200;
         res.statusMessage = "OK"
     } else if (req.url == "/") {
+        // Тут можно было бы сделать Apache Alias
         res.setHeader("Content-Type", "text/html; charset=utf-8;");
         fs.readFile("dist/index.html", "utf8", function (error, data) {
             res.end(data);
@@ -50,4 +50,4 @@ let server = new http.Server(function (req, res) {
     }
 });
 
-server.listen(8080, 'localhost');
+server.listen(8080);
